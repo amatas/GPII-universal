@@ -1,0 +1,23 @@
+#!/bin/bash
+
+OPTIND=1
+
+COUCHDBHOST=${COUCHDBHOST:-"couchdb"}
+COUCHDBPORT=${COUCHDBPORT:-"5984"}
+
+while getopts "t" opt; do
+    case "$opt" in
+    t)  # Upload test data
+		mkdir /tmp/preferences && \
+		/usr/local/bin/modify_preferences.sh /universal/testData/preferences/ /tmp/preferences && \
+		for preference in /tmp/preferences/*.json; do kanso upload $preference http://$COUCHDBHOST:$COUCHDBPORT/user; done
+		exit 0
+        ;;
+    esac
+done
+
+cd /universal
+sed -e "s|^ *\"userSourceUrl\": .*$|\"userSourceUrl\": \"http://$COUCHDBHOST:$COUCHDBPORT/user/%userToken\"|" -i gpii/node_modules/preferencesServer/configs/production.json
+sed -e "s|^ *\"rawPreferencesSourceUrl\": .*$|\"rawPreferencesSourceUrl\": \"http://$COUCHDBHOST:$COUCHDBPORT/user/%userToken\"|" -i gpii/node_modules/rawPreferencesServer/configs/production.json
+export NODE_ENV=preferencesServer.production
+node gpii.js
