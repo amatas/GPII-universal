@@ -27,10 +27,10 @@ docker rm couchdb
 docker run -d --name couchdb amatas/couchdb
 docker stop gpii
 docker rm gpii
-docker rmi amatas/gpii
-docker build -t amatas/gpii /universal
-docker run --rm --link couchdb:couchdb amatas/gpii /usr/local/bin/run -t
-docker run -d --name gpii --link couchdb:couchdb -p 8082:8082 amatas/gpii
+docker rmi amatas/gpii-local
+docker build -t amatas/gpii-local /universal
+docker run --rm --link couchdb:couchdb amatas/gpii-local /usr/local/bin/run -t
+docker run -d --name gpii --link couchdb:couchdb -p 8082:8082 amatas/gpii-local
 SCRIPT
 
   config.vm.provision "shell", inline: $script
