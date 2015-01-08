@@ -1,0 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "chef/centos-7.0"
+
+  # Please make sure that the 'host' port is available. The 'guest'
+  # port is what the VM will use.
+  config.vm.network "forwarded_port", guest: 8082, host: 8888
+
+  config.vm.synced_folder "../", "/universal",
+    type: "rsync",
+    rsync__auto: "true",
+    rsync__exclude: ".git/",
+    rsync__args: ["--verbose", "--archive", "--delete"]
+
+$script = <<SCRIPT
+yum -y update
+yum -y install epel-release
+yum -y install docker
+yum -y clean all
+systemctl enable docker
+systemctl start docker
+docker stop couchdb
+docker rm couchdb
+docker run -d --name couchdb amatas/couchdb
+docker stop gpii
+docker rm gpii
+docker rmi amatas/gpii-local
+docker build -t amatas/gpii-local /universal
+docker run --rm --link couchdb:couchdb amatas/gpii-local /usr/local/bin/run -t
+docker run -d --name gpii --link couchdb:couchdb -p 8082:8082 amatas/gpii-local
+SCRIPT
+
+  config.vm.provision "shell", inline: $script
+end
+
+
+# install docker
+# copy dockerfiles 
+# build containers
+# bind ports
+# testing?
