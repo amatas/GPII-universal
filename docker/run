@@ -19,5 +19,6 @@ done
 cd /universal
 sed -e "s|^ *\"userSourceUrl\": .*$|\"userSourceUrl\": \"http://$COUCHDBHOST:$COUCHDBPORT/user/%userToken\"|" -i gpii/node_modules/preferencesServer/configs/production.json
 sed -e "s|^ *\"rawPreferencesSourceUrl\": .*$|\"rawPreferencesSourceUrl\": \"http://$COUCHDBHOST:$COUCHDBPORT/user/%userToken\"|" -i gpii/node_modules/rawPreferencesServer/configs/production.json
+chown gpii /universal -R
 export NODE_ENV=preferencesServer.production
-node gpii.js
+su gpii -c "node gpii.js"

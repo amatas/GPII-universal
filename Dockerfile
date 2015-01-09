@@ -5,6 +5,7 @@ RUN yum -y update && \
     yum -y install git wget && \
     yum -y clean all && \
     npm -g install kanso && \
+    useradd -d /universal gpii && \
     wget https://raw.githubusercontent.com/avtar/ansible-costing/master/playbooks/files/modify_preferences.sh -O /usr/local/bin/modify_preferences.sh && \
     chmod a+x /usr/local/bin/modify_preferences.sh
 
