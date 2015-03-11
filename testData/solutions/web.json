@@ -234,5 +234,177 @@
                 }
             }
         ]
+    },
+    "edu.wisc.trace.oatts.client":{
+        "name": "OATTS",
+        "id": "edu.wisc.trace.oatts.client",
+        "contexts": {
+                        "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+            {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.edu\\.wisc\\.trace\\.oatts\\.client.id"
+                ],
+                "capabilitiesTransformations": { 
+                    "showTooltips": "display.edu\\.wisc\\.trace\\.oatts\\.client.user_preferences.show_tooltips",
+                    "showWidgetNames": "display.edu\\.wisc\\.trace\\.oatts\\.client.user_preferences.show_widget_names",
+                    "thinTitlebar": "display.edu\\.wisc\\.trace\\.oatts\\.client.user_preferences.thin_titlebar",
+                    "zoomSetting": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "display.edu\\.wisc\\.trace\\.oatts\\.client.user_preferences.zoom_setting",
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "small"
+                                },
+                                {
+                                    "upperBound": 24,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 32,
+                                    "output": "large"
+                                },
+                                {
+                                    "upperBound": 42,
+                                    "output": "veryLarge"
+                                },
+                                {
+                                    "output": "huge"
+                                }
+                            ]
+                        }
+                    },
+                    "widgetsZoomSetting": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "display.edu\\.wisc\\.trace\\.oatts\\.client.user_preferences.widgets_zoom_setting",
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "small"
+                                },
+                                {
+                                    "upperBound": 24,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 32,
+                                    "output": "large"
+                                },
+                                {
+                                    "upperBound": 42,
+                                    "output": "veryLarge"
+                                },
+                                {
+                                    "output": "huge"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "edu.wisc.trace.cccc":{
+        "name": "CCCC",
+        "contexts": {
+                        "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+           {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.edu\\.wisc\\.trace\\.cccc.id"
+                ],
+                "capabilitiesTransformations": { 
+                    "zoomSetting": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "display.edu\\.wisc\\.trace\\.cccc.zoom_setting",
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "small"
+                                },
+                                {
+                                    "upperBound": 24,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 32,
+                                    "output": "large"
+                                },
+                                {
+                                    "upperBound": 42,
+                                    "output": "veryLarge"
+                                },
+                                {
+                                    "output": "huge"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "edu.wisc.trace.gahrt":{
+        "name": "GAHRT",
+        "contexts": {
+                        "OS": [
+                {
+                    "id": "web"
+                }
+            ]
+        },
+        "settingsHandlers": [
+           {
+                "type": "gpii.settingsHandlers.noSettings",
+                "capabilities": [
+                    "applications.edu\\.wisc\\.trace\\.gahrt.id"
+                ],
+                "capabilitiesTransformations": { 
+                    "zoomSetting": {
+                        "transform": {
+                            "type": "gpii.transformer.quantize",
+                            "inputPath": "display.edu\\.wisc\\.trace\\.gahrt.zoom_setting",
+                            "ranges": [
+                                {
+                                    "upperBound": 12,
+                                    "output": "small"
+                                },
+                                {
+                                    "upperBound": 24,
+                                    "output": "medium"
+                                },
+                                {
+                                    "upperBound": 32,
+                                    "output": "large"
+                                },
+                                {
+                                    "upperBound": 42,
+                                    "output": "veryLarge"
+                                },
+                                {
+                                    "output": "huge"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        ]
     }
 }
