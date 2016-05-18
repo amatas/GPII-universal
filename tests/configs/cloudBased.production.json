@@ -3,7 +3,7 @@
     "options": {
         "distributeOptions": [
             {
-                "record": "http://localhost:8082/preferences/%userToken",
+                "record": "http://server:8082/preferences/%userToken",
                 "target": "{that flowManager}.options.urls.preferences"
             }
         ]
