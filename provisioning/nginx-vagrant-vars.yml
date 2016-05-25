@@ -1,0 +1,12 @@
+---
+
+nginx_reverse_endpoints:
+  - name: preferences
+    domains:
+      - "_"
+    backends:
+      - localhost:8082
+    ssl_enabled: true
+    ssl_certificate: /etc/nginx/ssl/server.crt
+    ssl_certificate_key: /etc/nginx/ssl/server.key
+

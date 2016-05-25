@@ -1,0 +1,17 @@
+---
+
+- hosts: localhost
+  become: true
+
+  vars_files:
+    - "{{ lookup('env', 'VARS_FILE')  }}"
+
+  pre_tasks:
+    - debug: var=couchdb_create_admin_user
+    - debug: var=couchdb_admin_username
+    - debug: var=couchdb_admin_password
+
+  roles:
+    - facts
+    - couchdb
+

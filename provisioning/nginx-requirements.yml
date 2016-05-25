@@ -1,0 +1,9 @@
+- src: http://github.com/idi-ops/ansible-facts.git
+  name: facts
+
+- src: https://github.com/idi-ops/ansible-nginx-reverse.git
+  name: nginx-reverse
+
+- src: https://github.com/idi-ops/ansible-nginx.git
+  name: nginx
+

@@ -1,0 +1,6 @@
+---
+
+couchdb_create_admin_user: "{{ lookup('env', 'CREATE_ADMIN_USER') | default('True',true) | bool }}"
+couchdb_admin_username: "{{ lookup('env', 'ADMIN_USERNAME') | default('adminusr',true) }}"
+couchdb_admin_password: "{{ lookup('env', 'ADMIN_PASSWORD') | default('passwdusr',true) }}"
+

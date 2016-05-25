@@ -1,0 +1,29 @@
+---
+
+- hosts: localhost
+  become: true
+
+    - name: Create SSL directory
+      file:
+        path: /etc/nginx/ssl
+        state: directory
+
+    - name: "Save certificates"
+      copy:
+        src: "/vagrant/provisioning/pki/{{ item }}"
+        dest: "/etc/nginx/ssl/{{ item }}"
+        mode: 0600
+      with_items:
+        - "server.crt"
+        - "server.key"
+        - "dhparams.pem"
+
+  vars_files:
+    - "{{ lookup('env', 'VARS_FILE')  }}"
+
+  roles:
+    - facts
+    - nginx
+    - nginx-reverse
+
+

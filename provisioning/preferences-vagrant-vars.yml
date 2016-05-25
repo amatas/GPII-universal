@@ -1,0 +1,19 @@
+---
+
+preferences_server_couchdb_host_address: "server:5984"
+preferences_server_environment: "preferencesServer.production"
+preferences_server_data_loader_couchdb_host_address: "server:5984"
+preferences_server_data_loader_cleanup_after: false
+nodejs_version: "0.10.42"
+nodejs_app_install_dir: "/opt/gpii/node_modules/universal"
+nodejs_app_start_script: "gpii.js"
+nodejs_app_name: "universal"
+nodejs_app_host_address: "server"
+nodejs_app_git_repo: "https://github.com/GPII/universal.git"
+nodejs_app_git_branch: "master"
+nodejs_app_commands:
+  - npm install
+  - grunt dedupe-infusion
+nodejs_app_env_vars:
+  - "NODE_ENV={{ preferences_server_environment }}"
+

@@ -1,0 +1,64 @@
+{
+    "global": {
+        "provider": "virtualbox",
+        "cpu": 2,
+        "memory": 1024 
+    },
+    "vms": {
+        "server": {
+            "autostart": true,
+            "clone": true,
+            "box": "inclusivedesign/centos7",
+            "gui": false,
+            "networks": {
+                "private": {
+                    "type": "private"
+                }
+            },
+            "apps": {
+                "couchdb": {
+                    "create_admin_user": true,
+                    "admin_username": "adminusr",
+                    "admin_password": "passwdusr",
+                    "deploy": true
+                },
+                "preferences": {
+                    "port": 8082,
+                    "config": "cloudbased.json",
+                    "deploy": true
+                }
+            }
+        },
+        "fedora": {
+            "autostart": true,
+            "box": "inclusivedesign/fedora23",
+            "gui": true,
+            "sound": true,
+            "cpu": 4,
+            "memory": 2048,
+            "network": {
+                "private": {
+                    "type": "private"
+                }
+            },
+            "folders": {
+                "code": {
+                    "src": ".",
+                    "dest": "/home/vagrant/sync/node_modules/universal"
+                }
+            }, 
+            "apps": {
+                "universal": {
+                    "deploy": false
+                }
+            },
+            "provision": {
+                "shell": [
+                    "sudo touch /tmp/hi1",
+                    "sudo touch /tmp/hi2"
+                ]
+            }  
+        }
+    }
+}
+
