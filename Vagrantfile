@@ -8,11 +8,13 @@ require_relative "lib/config_provision.rb"
 require_relative "lib/config_network.rb"
 require_relative "lib/config_folders.rb"
 
-environment_file = File.expand_path (ENV['VAGRANT_ENV_FILE'] || "./vagrant-envs/default.json")
+vagrant_env = ENV['VAGRANT_ENV'] || "default"
+environment_file = File.expand_path ("vagrant-envs" + File::SEPARATOR +
+                                     vagrant_env + ".json")
 if File.exists?(environment_file)
   environment = JSON.parse(File.read(environment_file))
 else
-  raise "Environment config file not found"
+  raise "Environment config file not found, see vagrant-envs directory"
 end
 
 build_hosts_list(environment["vms"])
@@ -23,7 +25,8 @@ Vagrant.configure(2) do |config|
 
     config.vm.define vm_id, autostart: vm_config["autostart"] do |instance|
 
-      instance.vm.hostname = vm_id
+      # Ansible handles this task better than Vagrant
+      #instance.vm.hostname = vm_id
 
       config_provider(instance, vm_config, environment["global"])
 
