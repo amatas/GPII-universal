@@ -43,4 +43,12 @@ def config_provision(instance, vm_config, vm_id)
       instance.vm.provision "shell", inline: shellcmds
     end
   end if vm_config["provision"]
+
+  test_file = ENV['TEST_FILE']
+  if !test_file.nil? and vm_config["tests_here"] then
+    # TODO remove hardcoded path
+    test_cmd = "cd /home/vagrant/sync/node_modules/universal && " \
+      "DISPLAY=:0 node tests/" + test_file + ".js"
+    instance.vm.provision "shell", inline: test_cmd
+  end
 end
