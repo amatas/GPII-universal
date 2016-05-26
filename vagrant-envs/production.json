@@ -36,6 +36,7 @@
             "sound": true,
             "cpu": 4,
             "memory": 2048,
+            "tests_here": true,
             "network": {
                 "private": {
                     "type": "private"
@@ -47,7 +48,7 @@
                     "dest": "/home/vagrant/sync/node_modules/universal"
                 }
             }, 
-            "apps": {
+            "apaps": {
                 "universal": {
                     "deploy": false
                 }
