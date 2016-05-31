@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 
 require 'json'
+require 'yaml'
 
 require_relative "lib/config_provider.rb"
 require_relative "lib/config_provision.rb"
@@ -10,9 +11,11 @@ require_relative "lib/config_folders.rb"
 
 vagrant_env = ENV['VAGRANT_ENV'] || "default"
 environment_file = File.expand_path ("vagrant-envs" + File::SEPARATOR +
-                                     vagrant_env + ".json")
-if File.exists?(environment_file)
-  environment = JSON.parse(File.read(environment_file))
+                                     vagrant_env )
+if File.exists?(environment_file + ".json")
+  environment = JSON.parse(File.read(environment_file + ".json"))
+elsif File.exists?(environment_file + ".yml")
+  environment = YAML.load(File.read(environment_file + ".yml"))
 else
   raise "Environment config file not found, see vagrant-envs directory"
 end

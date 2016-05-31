@@ -1,0 +1,25 @@
+---
+
+
+global:
+  provider: virtualbox
+  cpu: 2
+  memory: 1024
+vms:
+  fedora:
+    autostart: true
+    box: inclusivedesign/fedora23
+    gui: true
+    sound: true
+    tests_here: true
+    ports:
+      appport:
+        guest_port: 8081
+    folders:
+      code:
+        src: "."
+        dest: "/home/vagrant/sync/node_modules/universal"
+    apps:
+      universal:
+        deploy: false
+
