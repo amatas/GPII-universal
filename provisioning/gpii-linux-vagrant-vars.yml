@@ -23,4 +23,4 @@ nodejs_app_install_dir: /home/vagrant/gpii/gpii-linux
 nodejs_app_git_clone: true
 nodejs_app_git_repo: https://github.com/gpii/linux.git
 nodejs_app_git_branch: master
-nodejs_version: 0.10.44
+nodejs_branch: lts
