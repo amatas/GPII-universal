@@ -15,7 +15,7 @@ apps:
       - npm install
       - "sudo npm install -g testem"
     test_cmds:
-      - "mkdir -p node_modules"
+      - "mkdir -p node_modules" # The tests need a copy of universal in node_modules
       - "cp -r /app/gpii-universal /tmp/universal-tmp"
       - "rm -fr /tmp/universal-tmp/node_modules"
       - "mv /tmp/universal-tmp /app/gpii-universal/node_modules/universal"
