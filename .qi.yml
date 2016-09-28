@@ -12,9 +12,10 @@ apps:
       src: .
     run_in: fedora
     setup:
+      - "mkdir -p node_modules"
+      - "rsync -a . node_modules/universal" #universal requires universal itself in node_modules
       - npm install
       - "sudo npm install -g testem"
-      - "ln -s {{ folder['dest'] }} node_modules/universal" #universal requires universal itself in node_modules
     test_cmds:
       - "npm test"
       - "testem ci --file tests/web/testem_qi.json"
