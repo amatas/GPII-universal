@@ -28,7 +28,7 @@ DATALOADER_COUCHDB_URL="http://couchdb:${COUCHDB_PORT}/preferences"
 
 PREFERENCES_CONFIG="gpii.config.preferencesServer.standalone.production"
 PREFERENCES_DATASOURCE_URL="http://couchdb:${COUCHDB_PORT}/preferences/%userToken"
-PREFERENCES_DIR="/home/vagrant/sync/universal/testData/preferences"
+PREFERENCES_DIR="$(pwd)/testData/preferences"
 PREFERENCES_PORT=9081
 
 FLOWMANAGER_CONFIG="gpii.config.cloudBased.flowManager.production"
