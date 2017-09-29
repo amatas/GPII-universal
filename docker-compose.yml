@@ -1,0 +1,47 @@
+version: '3.2'
+services:
+  couchdb:
+    container_name: couchdb
+    image: couchdb
+    ports:
+    - "5984:5984"
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:5984"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 10
+  universal:
+    image: universal
+    build:
+      context: .
+  preferences:
+    container_name: preferences
+    image: universal
+    links:
+      - couchdb
+    ports:
+    - "9081:9081"
+    environment:
+      NODE_ENV: "gpii.config.preferencesServer.standalone.production"
+      GPII_PREFERENCES_DATASOURCE_URL: "http://couchdb:5984/preferences/%userToken"
+      GPII_PREFERENCES_LISTEN_PORT: 9081
+  flowmanager:
+    container_name: flowmanager
+    image: universal
+    links:
+      - preferences
+    ports:
+    - "9082:9082"
+  data_loader:
+    container_name: dataloader
+    image: gpii/preferences-dataloader
+    links:
+      - couchdb
+    environment:
+      PREFERENCES_DIR: "/data"
+      COUCHDB_URL: "http://couchdb:5984/preferences"
+      CLEAR_INDEX: 1
+    volumes:
+      - "./testData/preferences:/data:ro"
+networks:
+  default:
