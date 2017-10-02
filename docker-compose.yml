@@ -11,9 +11,11 @@ services:
       timeout: 10s
       retries: 10
   universal:
+    container_name: base_universal
     image: universal
     build:
       context: .
+    command: "true"
   preferences:
     container_name: preferences
     image: universal
