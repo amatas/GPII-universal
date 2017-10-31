@@ -2,7 +2,7 @@ version: '3.2'
 services:
   couchdb:
     container_name: couchdb
-    image: couchdb
+    image: gpii/couchdb:latest
     ports:
     - "5984:5984"
     healthcheck:
@@ -10,6 +10,8 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 10
+    environment:
+      ERLANG_COOKIE: "qwertyuiopasdfghjkl"
   universal:
     container_name: base_universal
     image: universal
@@ -33,7 +35,11 @@ services:
     links:
       - preferences
     ports:
-    - "9082:9082"
+      - "9082:9082"
+    environment:
+      NODE_ENV: "gpii.config.cloudBased.flowManager.production"
+      GPII_FLOWMANAGER_PREFERENCES_DATASOURCE_URL: "http://preferences:9081/preferences/%userToken"
+      GPII_FLOWMANAGER_LISTEN_PORT: 9082    
   data_loader:
     container_name: dataloader
     image: gpii/preferences-dataloader
@@ -42,7 +48,7 @@ services:
     environment:
       PREFERENCES_DIR: "/data"
       COUCHDB_URL: "http://couchdb:5984/preferences"
-      CLEAR_INDEX: 1
+      CLEAR_INDEX: 0
     volumes:
       - "./testData/preferences:/data:ro"
 networks:
