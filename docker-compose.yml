@@ -40,6 +40,12 @@ services:
       NODE_ENV: "gpii.config.cloudBased.flowManager.production"
       GPII_FLOWMANAGER_PREFERENCES_DATASOURCE_URL: "http://preferences:9081/preferences/%userToken"
       GPII_FLOWMANAGER_LISTEN_PORT: 9082    
+  init_couchdb:
+    container_name: init_couchdb
+    image: alpine
+    command: sh -c "apk update && apk add curl && curl -s -X PUT http://couchdb:5984/_users"
+    links:
+      - couchdb
   data_loader:
     container_name: dataloader
     image: gpii/preferences-dataloader
